@@ -1,4 +1,6 @@
 package com.zarudna.foodplacesnearby.model.entity
 
-data class Place(var title: String) {
+import io.realm.RealmModel
+
+data class Place(var title: String): RealmModel {
 }

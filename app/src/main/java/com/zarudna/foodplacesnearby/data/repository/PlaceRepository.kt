@@ -13,11 +13,13 @@ class PlaceRepository @Inject constructor(
     private var placesWebservice: PlacesWebservice
 ) {
 
-    suspend fun reloadPlaces(latLng: LatLng, limit: Int) {
+    suspend fun reloadPlaces(latLng: LatLng, limit: Int): List<Place> {
         val places = placesWebservice.loadFoodPlaces(latLng, limit)
 
         deleteAll()
         save(places)
+
+        return places
     }
 
     private suspend fun save(places: List<Place>) {

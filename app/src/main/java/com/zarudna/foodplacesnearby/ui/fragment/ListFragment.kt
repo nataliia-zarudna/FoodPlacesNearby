@@ -47,7 +47,7 @@ class ListFragment : Fragment(), PlacesAdapter.OnPlaceClickListener {
     }
 
     override fun onPlaceClick(place: Place) {
-        val action = PlacesFragmentDirections.actionPlacesToPlaceDetails(place.title!!)
+        val action = PlacesFragmentDirections.actionPlacesToPlaceDetails(place)
         view?.findNavController()?.navigate(action)
     }
 }

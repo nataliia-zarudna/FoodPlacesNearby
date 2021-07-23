@@ -34,9 +34,11 @@ class PlacesAdapter(val onPlaceClickListener: OnPlaceClickListener) :
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val title: TextView = view.findViewById(R.id.title)
+        private val address: TextView = view.findViewById(R.id.address)
 
         fun bind(place: Place) {
             title.text = place.title
+            address.text = place.address
 
             itemView.setOnClickListener {
                 onPlaceClickListener.onPlaceClick(place)

@@ -40,8 +40,7 @@ class PlacesViewModel(
 
             var places = placeRepository.getSavedPlaces(farLeft, farRight, nearLeft, nearRight)
             if (places.size < MAX_SEARCH_LOCATIONS) {
-                placeRepository.reloadPlaces(target, MAX_SEARCH_LOCATIONS)
-                places = placeRepository.getSavedPlaces(farLeft, farRight, nearLeft, nearRight)
+                places = placeRepository.reloadPlaces(target, MAX_SEARCH_LOCATIONS)
             }
             placesLiveData.value = places
         }

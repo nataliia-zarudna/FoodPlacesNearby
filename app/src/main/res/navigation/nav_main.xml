@@ -15,27 +15,14 @@
             app:destination="@id/placeDetails" />
     </fragment>
 
-    <fragment
-        android:id="@+id/list"
-        android:name="com.zarudna.foodplacesnearby.ui.fragment.ListFragment"
-        tools:layout="@layout/fragment_list" >
-        <action
-            android:id="@+id/action_list_to_placeDetails"
-            app:destination="@id/placeDetails" />
-    </fragment>
-
-    <fragment
+    <dialog
         android:id="@+id/placeDetails"
         android:name="com.zarudna.foodplacesnearby.ui.fragment.PlaceDetailsFragment"
         tools:layout="@layout/fragment_place_details">
 
         <argument
             android:name="place"
-            app:argType="string" />
-    </fragment>
-
-    <action
-        android:id="@+id/action_global_placeDetails"
-        app:destination="@id/placeDetails" />
+            app:argType="com.zarudna.foodplacesnearby.model.entiry.Place" />
+    </dialog>
 
 </navigation>

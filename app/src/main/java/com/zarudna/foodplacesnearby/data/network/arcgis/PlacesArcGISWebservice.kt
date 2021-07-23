@@ -20,6 +20,7 @@ class PlacesArcGISWebservice : PlacesWebservice {
         const val CATEGORY_FOOD = "Food"
         const val ATTR_PLACE_NAME = "PlaceName"
         const val ATTR_PLACE_ADDRESS = "Place_addr"
+        const val ATTR_PLACE_PHONE = "Phone"
     }
 
     override suspend fun loadFoodPlaces(latLng: LatLng, limit: Int): List<Place> {
@@ -34,6 +35,7 @@ class PlacesArcGISWebservice : PlacesWebservice {
                     Point(latLng.longitude, latLng.latitude, SpatialReferences.getWgs84())
                 resultAttributeNames.add(ATTR_PLACE_NAME)
                 resultAttributeNames.add(ATTR_PLACE_ADDRESS)
+                resultAttributeNames.add(ATTR_PLACE_PHONE)
             }
 
             val geocodeResultsFuture = locatorTask.geocodeAsync("", geocodeParameters)
@@ -44,6 +46,8 @@ class PlacesArcGISWebservice : PlacesWebservice {
                     val places = geocodeResults.map {
                         Place(
                             it.label,
+                            it.attributes[ATTR_PLACE_ADDRESS].toString(),
+                            it.attributes[ATTR_PLACE_PHONE].toString(),
                             it.displayLocation.y,
                             it.displayLocation.x
                         )

@@ -1,10 +1,10 @@
 package com.zarudna.foodplacesnearby.data.database.dao
 
-import com.zarudna.foodplacesnearby.model.entity.Place
+import com.zarudna.foodplacesnearby.model.entiry.Place
 
 interface PlaceDao {
 
-    fun upsert(places: List<Place>)
+    suspend fun upsert(places: List<Place>)
 
     fun getAll(): List<Place>
 }

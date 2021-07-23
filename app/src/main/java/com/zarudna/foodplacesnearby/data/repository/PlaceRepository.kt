@@ -1,22 +1,30 @@
 package com.zarudna.foodplacesnearby.data.repository
 
+import com.google.android.gms.maps.model.LatLng
 import com.zarudna.foodplacesnearby.data.database.dao.PlaceDao
-import com.zarudna.foodplacesnearby.model.entity.Place
-import io.realm.Realm
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.zarudna.foodplacesnearby.data.network.PlacesWebservice
+import com.zarudna.foodplacesnearby.model.entiry.Place
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class PlaceRepository(var placeDao: PlaceDao) {
+@Singleton
+class PlaceRepository @Inject constructor(
+    private var placeDao: PlaceDao,
+    private var placesWebservice: PlacesWebservice
+) {
 
-    suspend fun save(places: List<Place>) {
-        withContext(Dispatchers.IO) {
-            placeDao.upsert(places)
-        }
+    suspend fun loadPlaces(latLng: LatLng, limit: Int): List<Place> {
+        val places = placesWebservice.loadFoodPlaces(latLng, limit);
+        save(places)
+
+        return places
     }
 
-    suspend fun getAll(): List<Place> {
-        val realmInst = Realm.getDefaultInstance()
-        val realmPlaces = realmInst.where(Place::class.java).findAll()
-        return realmInst.copyFromRealm(realmPlaces)
+    suspend fun save(places: List<Place>) {
+        return placeDao.upsert(places)
+    }
+
+    fun getAll(): List<Place> {
+        return placeDao.getAll()
     }
 }

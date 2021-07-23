@@ -1,21 +1,19 @@
 package com.zarudna.foodplacesnearby.data.database.dao.realm
 
 import com.zarudna.foodplacesnearby.data.database.dao.PlaceDao
-import com.zarudna.foodplacesnearby.model.entity.Place
+import com.zarudna.foodplacesnearby.model.entiry.Place
 import io.realm.Realm
 
-class PlaceRealmDao : PlaceDao {
+class PlaceRealmDao(var realm: Realm) : PlaceDao {
 
-    override fun upsert(places: List<Place>) {
-        val realmInst = Realm.getDefaultInstance()
-        realmInst.executeTransaction { realm ->
-            realm.insertOrUpdate(places)
+    override suspend fun upsert(places: List<Place>) {
+        realm.executeTransactionAsync { transaction ->
+            transaction.insertOrUpdate(places)
         }
     }
 
     override fun getAll(): List<Place> {
-        val realmInst = Realm.getDefaultInstance()
-        val realmPlaces = realmInst.where(Place::class.java).findAll()
-        return realmInst.copyFromRealm(realmPlaces)
+        val realmPlaces = realm.where(Place::class.java).findAll()
+        return realm.copyFromRealm(realmPlaces)
     }
 }

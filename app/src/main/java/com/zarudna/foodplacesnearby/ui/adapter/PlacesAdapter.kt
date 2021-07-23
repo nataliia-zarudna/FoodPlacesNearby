@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.zarudna.foodplacesnearby.R
-import com.zarudna.foodplacesnearby.model.entity.Place
+import com.zarudna.foodplacesnearby.model.entiry.Place
 
 class PlacesAdapter(val onPlaceClickListener: OnPlaceClickListener) :
     RecyclerView.Adapter<PlacesAdapter.ViewHolder>() {

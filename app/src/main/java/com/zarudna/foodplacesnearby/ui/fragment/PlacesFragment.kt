@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
+import com.zarudna.foodplacesnearby.ui.adapter.PlaceTabAdapter
 import com.zarudna.foodplacesnearby.R
 import com.zarudna.foodplacesnearby.databinding.FragmentPlacesBinding
-import com.zarudna.foodplacesnearby.ui.adapter.PlaceTabAdapter
+import java.lang.IllegalArgumentException
 
 class PlacesFragment : Fragment() {
 

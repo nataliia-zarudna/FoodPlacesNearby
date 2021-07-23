@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -78,6 +79,15 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnCameraIdleListen
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+
+        map.setOnInfoWindowClickListener { marker ->
+            marker.tag?.let {
+                if (it is Place) {
+                    showPlaceDetails(it)
+                }
+            }
+        }
+
         updateLocation()
 
         viewModel.placesLiveData.observe(viewLifecycleOwner) { places ->
@@ -88,10 +98,12 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnCameraIdleListen
     private fun displaySearchResult(places: List<Place>) {
         for (place in places) {
             if (place.lat != null && place.lng != null) {
-                map.addMarker(
+                val marker = map.addMarker(
                     MarkerOptions()
                         .position(LatLng(place.lat!!, place.lng!!))
+                        .title(place.title)
                 )
+                marker?.tag = place
             }
         }
     }
@@ -155,5 +167,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnCameraIdleListen
 
                 map.setOnCameraIdleListener(this)
             }
+    }
+
+    private fun showPlaceDetails(place: Place) {
+        val action = PlacesFragmentDirections.actionPlacesToPlaceDetails(place)
+        view?.findNavController()?.navigate(action)
     }
 }

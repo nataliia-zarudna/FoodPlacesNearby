@@ -31,7 +31,7 @@ class PlacesArcGISWebservice : PlacesWebservice {
                 categories.add(CATEGORY_FOOD)
                 maxResults = limit
                 preferredSearchLocation =
-                    Point(latLng.latitude, latLng.longitude, SpatialReferences.getWgs84())
+                    Point(latLng.longitude, latLng.latitude, SpatialReferences.getWgs84())
                 resultAttributeNames.add(ATTR_PLACE_NAME)
                 resultAttributeNames.add(ATTR_PLACE_ADDRESS)
             }
@@ -44,8 +44,8 @@ class PlacesArcGISWebservice : PlacesWebservice {
                     val places = geocodeResults.map {
                         Place(
                             it.label,
-                            it.displayLocation.x,
-                            it.displayLocation.y
+                            it.displayLocation.y,
+                            it.displayLocation.x
                         )
                     }
 

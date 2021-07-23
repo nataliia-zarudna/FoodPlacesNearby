@@ -1,33 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/dialog_content_padding">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/tvTitle"
         style="@style/AppTheme.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Underground Pizza" />
 
+    <ImageView
+        android:id="@+id/ivAddressIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="18dp"
+        android:src="@drawable/ic_place"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
     <TextView
-        android:id="@+id/address"
+        android:id="@+id/tvAddress"
         style="@style/AppTheme.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="6dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAddressIcon"
+        app:layout_constraintLeft_toRightOf="@id/ivAddressIcon"
+        app:layout_constraintTop_toTopOf="@id/ivAddressIcon"
         tools:text="20 W 34th St, New York, NY 10001, United States" />
 
+    <ImageView
+        android:id="@+id/ivPhoneIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_phone"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivAddressIcon"
+        tools:visibility="visible" />
+
     <TextView
-        android:id="@+id/phone"
+        android:id="@+id/tvPhone"
         style="@style/AppTheme.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="+123456" />
+        android:layout_marginStart="6dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/ivPhoneIcon"
+        app:layout_constraintLeft_toRightOf="@id/ivPhoneIcon"
+        app:layout_constraintTop_toTopOf="@id/ivPhoneIcon"
+        tools:text="+123456"
+        tools:visibility="visible" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

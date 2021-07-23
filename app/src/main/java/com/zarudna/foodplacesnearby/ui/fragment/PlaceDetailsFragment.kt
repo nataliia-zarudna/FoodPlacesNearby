@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zarudna.foodplacesnearby.R
 import com.zarudna.foodplacesnearby.databinding.FragmentPlaceDetailsBinding
 import com.zarudna.foodplacesnearby.model.entiry.Place
@@ -18,7 +18,7 @@ class PlaceDetailsFragment() : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireActivity())
+        return MaterialAlertDialogBuilder(requireActivity())
             .setTitle(R.string.title_details)
             .setView(binding.root)
             .setPositiveButton(android.R.string.ok) { dialog, which ->
@@ -37,8 +37,13 @@ class PlaceDetailsFragment() : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val place: Place? = arguments?.getParcelable("place") as Place?
-        binding.title.text = place?.title
-        binding.address.text = place?.address
-        binding.phone.text = place?.phone
+        binding.tvTitle.text = place?.title
+        binding.tvAddress.text = place?.address
+
+        if (place?.phone?.isNotEmpty() == true) {
+            binding.tvPhone.text = place.phone
+            binding.tvPhone.visibility = View.VISIBLE
+            binding.ivPhoneIcon.visibility = View.VISIBLE
+        }
     }
 }

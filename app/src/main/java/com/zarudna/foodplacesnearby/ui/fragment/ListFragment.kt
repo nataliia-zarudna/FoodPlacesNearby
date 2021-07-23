@@ -39,7 +39,7 @@ class ListFragment : Fragment(), PlacesAdapter.OnPlaceClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         placesAdapter = PlacesAdapter(this)
-        binding.places.adapter = placesAdapter
+        binding.rvPlaces.adapter = placesAdapter
 
         viewModel.placesLiveData.observe(viewLifecycleOwner) { places ->
             placesAdapter?.places = places

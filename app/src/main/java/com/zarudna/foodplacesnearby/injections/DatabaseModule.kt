@@ -5,10 +5,10 @@ import dagger.Provides;
 import io.realm.Realm;
 
 @Module
-public class DatabaseModule {
+class DatabaseModule {
 
     @Provides
-    Realm providesRealm() {
+    fun providesRealm(): Realm {
         return Realm.getDefaultInstance();
     }
 }
